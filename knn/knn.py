@@ -58,8 +58,21 @@ class Knearest:
         # these indices
         #
         # http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
-
-        return self._y[item_indices[0]]
+        cnt = Counter()
+        cntNew
+        for ii in item_indices:
+            cnt[ii] += 1
+            
+        major = cnt.most_common(1)
+        
+        for i in cnt:
+            if cnt[i] == major:
+                cntNew[i] = major
+                
+        if len(cntNew) > 1:
+            return 0
+        else:
+            return list(cntNew)
 
     def classify(self, example):
         """
