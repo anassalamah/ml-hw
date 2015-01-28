@@ -3,7 +3,7 @@ from collections import Counter, defaultdict
 
 import random
 import numpy
-from numpy import median
+from numpy import median, array
 from sklearn.neighbors import BallTree
 
 class Numbers:
@@ -42,8 +42,6 @@ class Knearest:
 
         # You can modify the constructor, but you shouldn't need to
         self._kdtree = BallTree(x)
-        #print "X: ", x[0]
-        #print "Y: ", y[0]
         self._y = y
         self._k = k
 
@@ -60,25 +58,16 @@ class Knearest:
         # these indices
         #
         # http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
-        """cnt = Counter()
-        cntNew = Counter()
-        for ii in item_indices:
-            cnt[ii] += 1
-            
-        major = cnt.most_common(1)
-        print "Major: ", major[0][1]
-        for i in cnt:
-            if cnt[i] == major[0][1]:
-                cntNew[i] = major[0][1]
-                
-        if len(cntNew) > 1:
-            print cntNew
-            return 0
-        else:
-            print list(cntNew)
-            return list(cntNew)"""
-        
-        return self._y[item_indices[0]]
+        cnt = Counter(self._y[item_indices])
+        major_val = max(cnt.values())
+        cnt_ordered = cnt.most_common()
+        y = []
+        for i in range(len(cnt)):
+            major = cnt_ordered[i]
+            if major[1] == major_val:
+                y.append(major[0])
+        out = median(y)
+        return out
 
     def classify(self, example):
         """
@@ -90,9 +79,11 @@ class Knearest:
 
         # Finish this function to find the k closest points, query the
         # majority function, and return the value.
-
-        return self.majority(list(random.randint(0, len(self._y)) \
-                                  for x in xrange(self._k)))
+        dist, ind = self._kdtree.query(example,self._k)
+        ind_vals = [n for m in ind for n in m]
+        return self.majority(ind_vals)
+        #return self.majority(list(random.randint(0, len(self._y)) \
+                                  #for x in xrange(self._k)))
 
     def confusion_matrix(self, test_x, test_y):
         """
@@ -112,6 +103,12 @@ class Knearest:
         d = defaultdict(dict)
         data_index = 0
         for xx, yy in zip(test_x, test_y):
+            
+            guess = int(self.classify(xx))
+            try:
+                d[yy][guess] += 1
+            except KeyError:
+                d[yy][guess] = 1
             data_index += 1
             if data_index % 100 == 0:
                 print("%i/%i for confusion matrix" % (data_index, len(test_x)))
