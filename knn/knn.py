@@ -42,6 +42,8 @@ class Knearest:
 
         # You can modify the constructor, but you shouldn't need to
         self._kdtree = BallTree(x)
+        #print "X: ", x[0]
+        #print "Y: ", y[0]
         self._y = y
         self._k = k
 
@@ -58,21 +60,25 @@ class Knearest:
         # these indices
         #
         # http://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
-        cnt = Counter()
-        cntNew
+        """cnt = Counter()
+        cntNew = Counter()
         for ii in item_indices:
             cnt[ii] += 1
             
         major = cnt.most_common(1)
-        
+        print "Major: ", major[0][1]
         for i in cnt:
-            if cnt[i] == major:
-                cntNew[i] = major
+            if cnt[i] == major[0][1]:
+                cntNew[i] = major[0][1]
                 
         if len(cntNew) > 1:
+            print cntNew
             return 0
         else:
-            return list(cntNew)
+            print list(cntNew)
+            return list(cntNew)"""
+        
+        return self._y[item_indices[0]]
 
     def classify(self, example):
         """
