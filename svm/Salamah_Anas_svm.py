@@ -23,9 +23,15 @@ def weight_vector(x, y, alpha):
     """
     Given a vector of alphas, compute the primal weight vector.
     """
-
+    #print "x: ", x
+    #print "y: ", y
+    #print "alpha: ", alpha
     w = zeros(len(x[0]))
     # TODO: IMPLEMENT THIS FUNCTION
+    
+    for i in xrange(len(x)):
+        w[0] += alpha[i]*y[i]*x[i][0]
+        w[1] += alpha[i]*y[i]*x[i][1]
     return w
 
 
@@ -36,7 +42,14 @@ def find_support(x, y, w, b, tolerance=0.001):
     """
 
     support = set()
+    #print "x: ", x
+    #print "y: ", y
+    #print "w: ", w
+    #print "b: ", b
     # TODO: IMPLEMENT THIS FUNCTION
+    for i in xrange(len(x)):
+        if (y[i]*((w[0]*x[i][0]+w[1]*x[i][1])+b)) - 1.0 <= tolerance:
+            support.add(i)
     return support
 
 
@@ -45,7 +58,13 @@ def find_slack(x, y, w, b):
     Given a primal support vector instance, return the indices for all of the
     slack vectors
     """
-
+    #print "x: ", x
+    #print "y: ", y
+    #print "w: ", w
+    #print "b: ", b
     slack = set()
     # TODO: IMPLEMENT THIS FUNCTION
+    for i in xrange(len(x)):
+        if (y[i]*((w[0]*x[i][0]+w[1]*x[i][1])+b)) < 1:
+            slack.add(i)
     return slack
