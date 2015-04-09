@@ -17,10 +17,15 @@ held to a higher standard.  You must clearly document baselines and
 show improvement over those baselines.  You'll also need to convince
 us to make sure you clearly convey why it's an interesting problem.
 
+Groups
+==================
+
+You must form a group of 3-4 students enrolled in this course.  If you have a project idea and you're not able to convince two other people to work on it, it's probably not that interesting.  You should instead join another group.  
+
 Proposal
 ==================
 
-The project proposal is due 2. April.  This one page PDF document
+The project proposal is due 3. April.  This one page PDF document
 should describe:
 
 * What project you're working on.  If you're not doing the shared competition, you must describe the task, data, and baselines clearly.
@@ -61,12 +66,7 @@ usual class time).  In the final presentation you will:
   is not the same thing as simply presenting the error matrix, as it
   does not inspect any individual examples.
 
-* The linguistic motivation for your features.  This is a
-  computational linguistics class, so you should give precedence to
-  features / techniques that we use in this class (e.g., syntax,
-  morphology, part of speech, word sense, etc.).  Given two features
-  that work equally well and one that is linguistically motivated,
-  we'll prefer the linguistically motivated one.
+* The motivation for your features.  Features shouldn't come out of nowhere; you should have a clear domain-specific story for how you derived the features or an error analysis motivations for the features you create.
 
 * Presumably you did many different things; how did they each
   individually contribute to your final result?
